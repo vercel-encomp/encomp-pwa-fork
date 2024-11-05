@@ -39,6 +39,8 @@ function onDetect(codes) {
   .eq('qrcode', codes[0].rawValue)
   .eq('differentiator', selected.value.value).then(({ error }) => {
     if (error) console.log(error)
+  }).then(() => {
+    getParticipants()
   })
 }
 </script>
@@ -91,7 +93,7 @@ function onDetect(codes) {
       <Separator class="bg-gray-400"/>
       <div class="flex flex-row items-center justify-between">
         <p class="font-bold text-lg text-primary mt-2">Lista de Participantes</p>
-        <div class="flex flex-row gap-1">
+        <div class="flex flex-row gap-1 mr-1">
           <MicVocal />
           <Soup />
         </div>
@@ -101,9 +103,9 @@ function onDetect(codes) {
           <div class="inline-flex justify-between w-full py-1 pl-2 rounded-lg"
               :class="{'bg-gray-900' : index % 2 == 0 }">
             <p class="text-start font-bold text-sm">{{ participant.participant_name }}</p>
-            <div class="flex flex-row gap-1">
-              <Check v-if="true" class="text-green-400"/>
-              <Check v-if="true" class="text-green-400"/>
+            <div class="flex flex-row gap-1 mr-1">
+              <Check v-if="participant.checked" class="text-green-400"/>
+              <Check v-if="participant.checked" class="text-green-400"/>
             </div>
           </div>
         </div>

@@ -84,8 +84,8 @@ function onDetect(codes) {
         </Command>
       </PopoverContent>
     </Popover>
-    <div>
-      <QrcodeStream @detect="onDetect" class="max-w-80 max-h-60 mt-10 rounded-xl"/>
+    <div class="max-h-60 max-w-56 overflow-hidden mt-5 rounded-lg">
+      <QrcodeStream @detect="onDetect"/>
     </div>
     <div class="mt-5 w-full">
       <Separator class="bg-gray-400"/>

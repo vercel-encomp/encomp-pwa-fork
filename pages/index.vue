@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-import { errorMessages } from 'vue/compiler-sfc'
+
+definePageMeta({
+  layout: ''
+})
 
 const supabase = useSupabaseClient()
 const router = useRouter()
@@ -46,13 +49,13 @@ async function signUp() {
 
     <form class="relative z-20 flex w-full max-w-80 flex-col items-center gap-6" @submit.prevent="signUp">
       <Input
-        class="rounded-full"
+        class="rounded-full border-primary"
         v-model="email"
         placeholder="Usuário"
         required
       />
       <Input
-        class="rounded-full"
+        class="rounded-full border-primary"
         v-model="password"
         type="password"
         placeholder="Senha"

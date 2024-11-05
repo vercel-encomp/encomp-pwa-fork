@@ -1,6 +1,6 @@
 <script setup>
 import { QrcodeStream } from 'vue-qrcode-reader'
-import { Check, ChevronsUpDown } from 'lucide-vue-next'
+import { Check, ChevronsUpDown, MicVocal, Soup } from 'lucide-vue-next'
 
 const isComboOpen = ref(false)
 const activities = [
@@ -19,7 +19,6 @@ const activities = [
 const selected = ref(activities[0])
 
 const supabase = useSupabaseClient();
-
 const participants = ref([])
 
 function getParticipants() {
@@ -28,39 +27,36 @@ function getParticipants() {
   .select('qrcode, participant_name, checked')
   .eq('differentiator', selected.value.value).then(({ data, error }) => {
     participants.value = data;
-    console.log(participants.value)
   })
 }
 
 function onDetect(codes) {
   console.log(codes[0].rawValue)
   console.log(selected.value.value)
-  const { error } =  supabase
+  supabase
   .from(['1','2','3'].includes(selected.value.value) ? 'checkin-talks' : 'checkin-courses')
   .update({checked: true})
   .eq('qrcode', codes[0].rawValue)
-  .eq('differentiator', selected.value.value)
-
-  if (error) console.log(error)
+  .eq('differentiator', selected.value.value).then(({ error }) => {
+    if (error) console.log(error)
+  })
 }
-
-onMounted(() => {
-  getParticipants()
-})
-
 </script>
 
 <template>
-  <div class="flex flex-col items-center pt-10">
+  <div class="flex flex-col items-center pt-2 mx-5">
+    <p class="text-sm mb-2">
+      Defina uma atividade para o credenciamento
+    </p>
     <Popover v-model:open="isComboOpen" class="">
       <PopoverTrigger as-child>
         <Button
           variant="outline"
           role="combobox"
           :aria-expanded="isComboOpen"
-          class="justify-between w-[220px] ">
+          class="justify-between w-[220px] border-primary">
           {{ selected ? selected.label : 'Selecione uma atividade...' }}
-          <ChevronsUpDown class="shrink-0" />
+          <ChevronsUpDown class="shrink-0 text-primary" />
         </Button>
       </PopoverTrigger>
       <PopoverContent class="p-0">
@@ -79,7 +75,8 @@ onMounted(() => {
                   isComboOpen = false
                 }"
               >
-              <Check :size="20" class="mr-2"/>
+              <Check v-if="selected.value === activity.value" :size="20" class="mr-2"/>
+              <Check v-else="selected.value === activity.value" :size="20" class="mr-2 opacity-0"/>
               {{ activity.label }}
               </CommandItem>
             </CommandGroup>
@@ -87,21 +84,31 @@ onMounted(() => {
         </Command>
       </PopoverContent>
     </Popover>
-    <div class="flex flex-col items-center">
-      <QrcodeStream @detect="onDetect" class="max-w-80 min-h-80 mt-10 rounded-xl border-2 border-red-300"/>
+    <div>
+      <QrcodeStream @detect="onDetect" class="max-w-80 max-h-60 mt-10 rounded-xl"/>
     </div>
-    <div class="mt-5">
-      <Separator class="bg-purple-400"/>
-      <p class="font-bold text-lg text-green-500">Lista de Participantes</p>
-      <ScrollArea class="mt-2 h-[350px]">
+    <div class="mt-5 w-full">
+      <Separator class="bg-gray-400"/>
+      <div class="flex flex-row items-center justify-between">
+        <p class="font-bold text-lg text-primary mt-2">Lista de Participantes</p>
+        <div class="flex flex-row gap-1">
+          <MicVocal />
+          <Soup />
+        </div>
+      </div>
+      <ScrollArea v-if="participants.length > 0" class="mt-2">
         <div v-for="(participant, index) in participants" :key="participants.qrcode">
-          <div class="inline-flex justify-between w-full py-1"
+          <div class="inline-flex justify-between w-full py-1 pl-2 rounded-lg"
               :class="{'bg-gray-900' : index % 2 == 0 }">
-            <p class="text-start font-bold">{{ participant.participant_name }}</p>
-            <Check v-if="participant.checked" class="text-green-400"/>
+            <p class="text-start font-bold text-sm">{{ participant.participant_name }}</p>
+            <div class="flex flex-row gap-1">
+              <Check v-if="true" class="text-green-400"/>
+              <Check v-if="true" class="text-green-400"/>
+            </div>
           </div>
         </div>
       </ScrollArea>
+      <div v-else class="w-full flex justify-center mt-10">Não há participantes</div>
     </div>
   </div>
 </template>

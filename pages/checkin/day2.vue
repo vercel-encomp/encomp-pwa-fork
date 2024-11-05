@@ -42,12 +42,20 @@ async function logout() {
         opt2="8"
         opt2-link="/checkin/day3"
       />
-      <div v-for="ticket in dayTickets" :key="ticket.ticket_qrcode" class="flex justify-center">
-        <div class="mb-10 flex min-w-[320px] flex-col items-center rounded-xl border-2 border-white py-5">
-          <p class="mb-5 max-w-[320px] text-wrap text-center text-xl font-bold md:text-3xl">
+      <div v-for="ticket in dayTickets" :key="ticket.ticket_qrcode">
+        <div class="mb-10 flex flex-col items-center py-5">
+          <p class="mb-5 lg:mb-10 max-w-[300px] lg:max-w-full text-wrap text-center text-xl font-bold lg:text-3xl">
             {{ ticket.ticket_name }}
           </p>
-          <QrcodeVue background="#111215" foreground="#14CFAA" :size="200" :value="ticket.ticket_qrcode" />
+          <div class="lg:hidden">
+            <QrcodeVue background="#111215" foreground="#14CFAA" :size="200" :value="ticket.ticket_qrcode" @click="logout"/>
+          </div>
+          <div class="hidden lg:block">
+            <QrcodeVue background="#111215" foreground="#14CFAA" :size="300" :value="ticket.ticket_qrcode" @click="logout"/>
+          </div>
+        </div>
+        <div class="mx-5">
+          <Separator v-if="dayTickets.length > 1" class="shrink-0 bg-primary"/>
         </div>
       </div>
     </div>

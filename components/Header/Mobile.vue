@@ -18,13 +18,5 @@ import { Calendar, Check, MenuIcon, QrCode } from 'lucide-vue-next'
 </script>
 
 <template>
-  <div class="lg:hidden">
-    <Sheet>
-      <SheetTrigger class="my-2">
-        <MenuIcon :size="40" />
-        PROGRAMAÇÃO
-      </SheetTrigger>
-      <SheetContent side="left" class="max-w-[250px] bg-primary" />
-    </Sheet>
-  </div>
+  
 </template>

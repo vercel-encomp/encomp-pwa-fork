@@ -13,8 +13,8 @@ const requestOptions = {
   },
 }
 
-const response = await fetch(apiUrl, requestOptions).then(response => response.json())
-const tickets = response.data
+// const response = await fetch(apiUrl, requestOptions).then(response => response.json())
+// const tickets = response.data
 
 const participants = []
 const DAY1_ACTIVITIES = ['1', 'Soft Skills', 'ASP.NET', 'UI/UX', 'Beatriz']
@@ -57,68 +57,48 @@ const addActivity = (participant, ticket) => {
   }
 }
 
-// const tickets = [
-//   {
-//     first_name: 'Felipe',
-//     last_name: 'Tolentino Pereira',
-//     email: 'felipe-pereira1@live.com',
-//     custom_form: [
-//       {value: '147.954.817-09'}
-//     ],
-//     ticket_name: 'DIA 2 (07 de Nov.) - Palestras',
-//     ticket_num_qr_code: 'DJDKJDK614'
-//   },
-//   {
-//     first_name: 'Felipe',
-//     last_name: 'Tolentino Pereira',
-//     email: 'felipe-pereira1@live.com',
-//     custom_form: [
-//       {value: '147.954.817-09'}
-//     ],
-//     ticket_name: 'DIA 3 (08 de Nov.) - Palestras',
-//     ticket_num_qr_code: '7FD6H9D37Q'
-//   },
-//   {
-//     first_name: 'Felipe',
-//     last_name: 'Tolentino Pereira',
-//     email: 'felipe-pereira1@live.com',
-//     custom_form: [
-//       {value: '147.954.817-09'}
-//     ],
-//     ticket_name: 'Minicurso - Do Zero ao CRUD! (Backend)',
-//     ticket_num_qr_code: '83H5K2V7J4'
-//   },
-//   {
-//     first_name: 'Felipe',
-//     last_name: 'Tolentino Pereira',
-//     email: 'felipe-pereira1@live.com',
-//     custom_form: [
-//       {value: '147.954.817-09'}
-//     ],
-//     ticket_name: 'Minicurso - Desenvolvimento ASP.NET',
-//     ticket_num_qr_code: '0S7M0Z7E0H'
-//   },
-//   {
-//     first_name: 'Felipe',
-//     last_name: 'Tolentino Silva',
-//     email: 'felipetolentinopereira1@gmail.com',
-//     custom_form: [
-//       {value: '147.954.817-10'}
-//     ],
-//     ticket_name: 'Combo - Todos os dias (Palestras)',
-//     ticket_num_qr_code: 'GH48HT35YYH'
-//   },
-//   {
-//     first_name: 'Felipe',
-//     last_name: 'Tolentino Silva',
-//     email: 'felipetolentinopereira1@gmail.com',
-//     custom_form: [
-//       {value: '147.954.817-10'}
-//     ],
-//     ticket_name: 'Minicurso - Análise de Dados com Python',
-//     ticket_num_qr_code: 'JDOV6GKD64'
-//   }
-// ]
+const tickets = [
+  {
+    first_name: 'Felipe',
+    last_name: 'Tolentino Pereira',
+    email: 'felipe-pereira1@live.com',
+    custom_form: [
+      {value: '147.954.817-09'}
+    ],
+    ticket_name: 'Combo - Todos os dias (Palestras)',
+    ticket_num_qr_code: 'TTUVUD4WJN'
+  },
+  {
+    first_name: 'Felipe',
+    last_name: 'Tolentino Pereira',
+    email: 'felipe-pereira1@live.com',
+    custom_form: [
+      {value: '147.954.817-09'}
+    ],
+    ticket_name: 'Minicurso - Análise de Dados',
+    ticket_num_qr_code: 'TU3SADTHBL'
+  },
+  {
+    first_name: 'Felipe',
+    last_name: 'Tolentino Pereira',
+    email: 'felipe-pereira1@live.com',
+    custom_form: [
+      {value: '147.954.817-09'}
+    ],
+    ticket_name: 'Minicurso - Do Zero ao CRUD! (Backend)',
+    ticket_num_qr_code: 'TU3SADTLXC'
+  },
+  {
+    first_name: 'Felipe',
+    last_name: 'Tolentino Pereira',
+    email: 'felipe-pereira1@live.com',
+    custom_form: [
+      {value: '147.954.817-09'}
+    ],
+    ticket_name: 'Minicurso - Introdução à Android Nativo',
+    ticket_num_qr_code: 'TU3SADTV2Z'
+  },
+]
 
 // Loop through all tickets fetched from the Sympla API and
 // create the user objects. Add tickets bough from the same person
@@ -160,40 +140,40 @@ const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZi
 
 const client = createClient(url, key)
 
-// function genPassword() {
-//   const chars = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-//   let password = ''
+function genPassword() {
+  const chars = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  let password = ''
 
-//   for (let i = 0; i < 12; i++) {
-//     const num = Math.floor(Math.random() * chars.length)
-//     password += chars.substring(num, num + 1)
-//   }
-//   console.log(password)
-//   return password
-// }
+  for (let i = 0; i < 12; i++) {
+    const num = Math.floor(Math.random() * chars.length)
+    password += chars.substring(num, num + 1)
+  }
+  console.log(password)
+  return password
+}
 
-// for (let i = 0; i < 2; i++) {
-//   try {
-//     const { error } = await client.auth.signUp({
-//       email: participants[i].email,
-//       password: genPassword(),
-//       options: {
-//         data: {
-//           first_name: participants[i].first_name,
-//           last_name: participants[i].last_name,
-//           cpf: participants[i].cpf,
-//           tickets: participants[i].tickets,
-//           admin: false
-//         }
-//       }
-//     })
-//     if (error) throw error;
-//     console.log("success")
-//   }
-//   catch(error) {
-//     console.log(error)
-//   }
-// }
+for (let i = 0; i < 2; i++) {
+  try {
+    const { error } = await client.auth.signUp({
+      email: participants[i].email,
+      password: genPassword(),
+      options: {
+        data: {
+          first_name: participants[i].first_name,
+          last_name: participants[i].last_name,
+          cpf: participants[i].cpf,
+          tickets: participants[i].tickets,
+          admin: false
+        }
+      }
+    })
+    if (error) throw error;
+    console.log("success")
+  }
+  catch(error) {
+    console.log(error)
+  }
+}
 
 // try {
 //   const { error } = await client.auth.signUp({
@@ -231,76 +211,76 @@ const client = createClient(url, key)
 // const { data: { user } } = await client.auth.getUser()
 // console.log(user.user_metadata.tickets[0].ticket_qrcode)
 
-for (const participant of participants) {
-  for (const day in participant.tickets) {
-    const tickets = participant.tickets[day]
-    for (const ticket of tickets) {
-      let table;
-      let diff;
+// for (const participant of participants) {
+//   for (const day in participant.tickets) {
+//     const tickets = participant.tickets[day]
+//     for (const ticket of tickets) {
+//       let table;
+//       let diff;
 
-      if (ticket.ticket_name.includes('Combo')) {
-        table = 'checkin-talks'
-        diff = day.slice(-1);
-      }
-      else if (ticket.ticket_name.includes('DIA 1')) {
-        table = 'checkin-talks'
-        diff = '1'
-      }
-      else if (ticket.ticket_name.includes('DIA 2')) {
-        table = 'checkin-talks'
-        diff = '2'
-      }
-      else if (ticket.ticket_name.includes('DIA 3')) {
-        table = 'checkin-talks'
-        diff = '3'
-      }
-      else if (ticket.ticket_name.includes('UI')) {
-        table = 'checkin-courses'
-        diff = 'UI'
-      }
-      else if (ticket.ticket_name.includes('ASP')) {
-        table = 'checkin-courses'
-        diff = 'ASP'
-      }
-      else if (ticket.ticket_name.includes('Skills')) {
-        table = 'checkin-courses'
-        diff = 'Beatriz'
-      }
-      else if (ticket.ticket_name.includes('Dados')) {
-        table = 'checkin-courses'
-        diff = 'Dados'
-      }
-      else if (ticket.ticket_name.includes('CRUD')) {
-        table = 'checkin-courses'
-        diff = 'CRUD'
-      }
-      else if (ticket.ticket_name.includes('Arduino')) {
-        table = 'checkin-courses'
-        diff = 'Arduino'
-      }
-      else if (ticket.ticket_name.includes('HTML')) {
-        table = 'checkin-courses'
-        diff = 'HTML'
-      }
-      else if (ticket.ticket_name.includes('Android')) {
-        table = 'checkin-courses'
-        diff = 'Android'
-      }
+//       if (ticket.ticket_name.includes('Combo')) {
+//         table = 'checkin-talks'
+//         diff = day.slice(-1);
+//       }
+//       else if (ticket.ticket_name.includes('DIA 1')) {
+//         table = 'checkin-talks'
+//         diff = '1'
+//       }
+//       else if (ticket.ticket_name.includes('DIA 2')) {
+//         table = 'checkin-talks'
+//         diff = '2'
+//       }
+//       else if (ticket.ticket_name.includes('DIA 3')) {
+//         table = 'checkin-talks'
+//         diff = '3'
+//       }
+//       else if (ticket.ticket_name.includes('UI')) {
+//         table = 'checkin-courses'
+//         diff = 'UI'
+//       }
+//       else if (ticket.ticket_name.includes('ASP')) {
+//         table = 'checkin-courses'
+//         diff = 'ASP'
+//       }
+//       else if (ticket.ticket_name.includes('Skills')) {
+//         table = 'checkin-courses'
+//         diff = 'Beatriz'
+//       }
+//       else if (ticket.ticket_name.includes('Dados')) {
+//         table = 'checkin-courses'
+//         diff = 'Dados'
+//       }
+//       else if (ticket.ticket_name.includes('CRUD')) {
+//         table = 'checkin-courses'
+//         diff = 'CRUD'
+//       }
+//       else if (ticket.ticket_name.includes('Arduino')) {
+//         table = 'checkin-courses'
+//         diff = 'Arduino'
+//       }
+//       else if (ticket.ticket_name.includes('HTML')) {
+//         table = 'checkin-courses'
+//         diff = 'HTML'
+//       }
+//       else if (ticket.ticket_name.includes('Android')) {
+//         table = 'checkin-courses'
+//         diff = 'Android'
+//       }
 
-      try {
-        const { error } = await client.from(table)
-        .insert({
-          qrcode: ticket.ticket_qrcode,
-          participant_name: `${participant.first_name} ${participant.last_name}`,
-          differentiator: diff
-        })
+//       try {
+//         const { error } = await client.from(table)
+//         .insert({
+//           qrcode: ticket.ticket_qrcode,
+//           participant_name: `${participant.first_name} ${participant.last_name}`,
+//           differentiator: diff
+//         })
 
-        if (error)
-          throw error
-      }
-      catch (error) {
-        console.log(error.message)
-      }
-    }
-  }
-}
+//         if (error)
+//           throw error
+//       }
+//       catch (error) {
+//         console.log(error.message)
+//       }
+//     }
+//   }
+// }

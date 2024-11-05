@@ -33,10 +33,10 @@ function getParticipants() {
 }
 
 function onDetect(codes) {
-  //console.log(codes[0].rawValue)
+  console.log(codes[0].rawValue)
   const { error } =  supabase
   .from(['1','2','3'].includes(selected.value.value) ? 'checkin-talks' : 'checkin-courses')
-  .update({checked: true})
+  .update({checked: 'true'})
   eq('qrcode', codes[0].rawValue)
 
   if (error) console.log(error)

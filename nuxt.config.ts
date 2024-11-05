@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     'nuxt-og-image',
     '@vite-pwa/nuxt',
+    'nuxt-lucide-icons',
   ],
 
   tailwindcss: {

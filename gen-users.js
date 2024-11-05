@@ -13,11 +13,11 @@ const requestOptions = {
   },
 }
 
-// const response = await fetch(apiUrl, requestOptions).then(response => response.json())
-// const tickets = response.data
+const response = await fetch(apiUrl, requestOptions).then(response => response.json())
+const tickets = response.data
 
 const participants = []
-const DAY1_ACTIVITIES = ['1', 'Soft Skills', 'ASP.NET', 'UI/ux']
+const DAY1_ACTIVITIES = ['1', 'Soft Skills', 'ASP.NET', 'UI/UX', 'Beatriz']
 const DAY2_ACTIVITIES = ['2', 'Análise', 'CRUD', 'Arduino']
 const DAY3_ACTIVITIES = ['3', 'Front', 'Android']
 
@@ -57,68 +57,68 @@ const addActivity = (participant, ticket) => {
   }
 }
 
-const tickets = [
-  {
-    first_name: 'Felipe',
-    last_name: 'Tolentino Pereira',
-    email: 'felipe-pereira1@live.com',
-    custom_form: [
-      {value: '147.954.817-09'}
-    ],
-    ticket_name: 'DIA 2 (07 de Nov.) - Palestras',
-    ticket_num_qr_code: 'DJDKJDK614'
-  },
-  {
-    first_name: 'Felipe',
-    last_name: 'Tolentino Pereira',
-    email: 'felipe-pereira1@live.com',
-    custom_form: [
-      {value: '147.954.817-09'}
-    ],
-    ticket_name: 'DIA 3 (08 de Nov.) - Palestras',
-    ticket_num_qr_code: '7FD6H9D37Q'
-  },
-  {
-    first_name: 'Felipe',
-    last_name: 'Tolentino Pereira',
-    email: 'felipe-pereira1@live.com',
-    custom_form: [
-      {value: '147.954.817-09'}
-    ],
-    ticket_name: 'Minicurso - Do Zero ao CRUD! (Backend)',
-    ticket_num_qr_code: '83H5K2V7J4'
-  },
-  {
-    first_name: 'Felipe',
-    last_name: 'Tolentino Pereira',
-    email: 'felipe-pereira1@live.com',
-    custom_form: [
-      {value: '147.954.817-09'}
-    ],
-    ticket_name: 'Minicurso - Desenvolvimento ASP.NET',
-    ticket_num_qr_code: '0S7M0Z7E0H'
-  },
-  {
-    first_name: 'Felipe',
-    last_name: 'Tolentino Silva',
-    email: 'felipetolentinopereira1@gmail.com',
-    custom_form: [
-      {value: '147.954.817-10'}
-    ],
-    ticket_name: 'Combo - Todos os dias (Palestras)',
-    ticket_num_qr_code: 'GH48HT35YYH'
-  },
-  {
-    first_name: 'Felipe',
-    last_name: 'Tolentino Silva',
-    email: 'felipetolentinopereira1@gmail.com',
-    custom_form: [
-      {value: '147.954.817-10'}
-    ],
-    ticket_name: 'Minicurso - Análise de Dados com Python',
-    ticket_num_qr_code: 'JDOV6GKD64'
-  }
-]
+// const tickets = [
+//   {
+//     first_name: 'Felipe',
+//     last_name: 'Tolentino Pereira',
+//     email: 'felipe-pereira1@live.com',
+//     custom_form: [
+//       {value: '147.954.817-09'}
+//     ],
+//     ticket_name: 'DIA 2 (07 de Nov.) - Palestras',
+//     ticket_num_qr_code: 'DJDKJDK614'
+//   },
+//   {
+//     first_name: 'Felipe',
+//     last_name: 'Tolentino Pereira',
+//     email: 'felipe-pereira1@live.com',
+//     custom_form: [
+//       {value: '147.954.817-09'}
+//     ],
+//     ticket_name: 'DIA 3 (08 de Nov.) - Palestras',
+//     ticket_num_qr_code: '7FD6H9D37Q'
+//   },
+//   {
+//     first_name: 'Felipe',
+//     last_name: 'Tolentino Pereira',
+//     email: 'felipe-pereira1@live.com',
+//     custom_form: [
+//       {value: '147.954.817-09'}
+//     ],
+//     ticket_name: 'Minicurso - Do Zero ao CRUD! (Backend)',
+//     ticket_num_qr_code: '83H5K2V7J4'
+//   },
+//   {
+//     first_name: 'Felipe',
+//     last_name: 'Tolentino Pereira',
+//     email: 'felipe-pereira1@live.com',
+//     custom_form: [
+//       {value: '147.954.817-09'}
+//     ],
+//     ticket_name: 'Minicurso - Desenvolvimento ASP.NET',
+//     ticket_num_qr_code: '0S7M0Z7E0H'
+//   },
+//   {
+//     first_name: 'Felipe',
+//     last_name: 'Tolentino Silva',
+//     email: 'felipetolentinopereira1@gmail.com',
+//     custom_form: [
+//       {value: '147.954.817-10'}
+//     ],
+//     ticket_name: 'Combo - Todos os dias (Palestras)',
+//     ticket_num_qr_code: 'GH48HT35YYH'
+//   },
+//   {
+//     first_name: 'Felipe',
+//     last_name: 'Tolentino Silva',
+//     email: 'felipetolentinopereira1@gmail.com',
+//     custom_form: [
+//       {value: '147.954.817-10'}
+//     ],
+//     ticket_name: 'Minicurso - Análise de Dados com Python',
+//     ticket_num_qr_code: 'JDOV6GKD64'
+//   }
+// ]
 
 // Loop through all tickets fetched from the Sympla API and
 // create the user objects. Add tickets bough from the same person
@@ -150,74 +150,71 @@ tickets.forEach(ticket => {
   }
 });
 
-console.log(participants[0].tickets)
-
-
 
 // USE THE NEWLY CREATED USER OBJECTS TO CREATE SUPABASE USERS PwOppHfgy9ls k55TgNSbIsTR
 
 import { createClient } from '@supabase/supabase-js'
 
-const url = 'https://bcqjsiqloadjpodrmolz.supabase.co'
-const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjcWpzaXFsb2FkanBvZHJtb2x6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjkzMDA3MDYsImV4cCI6MjA0NDg3NjcwNn0.A34ndV6QyXhO3JhSLGVBayOeMoTFBf7cmmMvN9Lgx6s'
+const url = 'https://kejnzgchwgonxhcmltfl.supabase.co'
+const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtlam56Z2Nod2dvbnhoY21sdGZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzA3MDk0NzAsImV4cCI6MjA0NjI4NTQ3MH0.WtyE1sPnawhcLXw4U0s5QOTcIZ1-N-l3zNBZ7JMOGSU'
 
 const client = createClient(url, key)
 
-function genPassword() {
-  const chars = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  let password = ''
+// function genPassword() {
+//   const chars = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+//   let password = ''
 
-  for (let i = 0; i < 12; i++) {
-    const num = Math.floor(Math.random() * chars.length)
-    password += chars.substring(num, num + 1)
-  }
-  console.log(password)
-  return password
-}
+//   for (let i = 0; i < 12; i++) {
+//     const num = Math.floor(Math.random() * chars.length)
+//     password += chars.substring(num, num + 1)
+//   }
+//   console.log(password)
+//   return password
+// }
 
-for (let i = 0; i < 2; i++) {
-  try {
-    const { error } = await client.auth.signUp({
-      email: participants[i].email,
-      password: genPassword(),
-      options: {
-        data: {
-          first_name: participants[i].first_name,
-          last_name: participants[i].last_name,
-          cpf: participants[i].cpf,
-          tickets: participants[i].tickets,
-          admin: false
-        }
-      }
-    })
-    if (error) throw error;
-    console.log("success")
-  }
-  catch(error) {
-    console.log(error)
-  }
-}
+// for (let i = 0; i < 2; i++) {
+//   try {
+//     const { error } = await client.auth.signUp({
+//       email: participants[i].email,
+//       password: genPassword(),
+//       options: {
+//         data: {
+//           first_name: participants[i].first_name,
+//           last_name: participants[i].last_name,
+//           cpf: participants[i].cpf,
+//           tickets: participants[i].tickets,
+//           admin: false
+//         }
+//       }
+//     })
+//     if (error) throw error;
+//     console.log("success")
+//   }
+//   catch(error) {
+//     console.log(error)
+//   }
+// }
 
-try {
-  const { error } = await client.auth.signUp({
-    email: 'admin@admin.com',
-    password: 'admin123',
-    options: {
-      data: {
-        first_name: 'admin',
-        last_name: 'admin',
-        cpf: '000.000.000-00',
-        tickets: {},
-        admin: true
-      }
-    }
-  })
-  if (error) throw error;
-  console.log("success")
-}
-catch(error) {
-  console.log(error)
-}
+// try {
+//   const { error } = await client.auth.signUp({
+//     email: 'admin@admin.com',
+//     password: 'admin123',
+//     options: {
+//       data: {
+//         first_name: 'admin',
+//         last_name: 'admin',
+//         cpf: '000.000.000-00',
+//         tickets: {},
+//         admin: true
+//       }
+//     }
+//   })
+//   if (error) throw error;
+//   console.log("success")
+// }
+// catch(error) {
+//   console.log(error)
+// }
 
 // try {
 //   const { error } = await client.auth.signInWithPassword({
@@ -267,7 +264,7 @@ for (const participant of participants) {
       }
       else if (ticket.ticket_name.includes('Skills')) {
         table = 'checkin-courses'
-        diff = 'Skills'
+        diff = 'Beatriz'
       }
       else if (ticket.ticket_name.includes('Dados')) {
         table = 'checkin-courses'

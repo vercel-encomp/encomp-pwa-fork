@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { errorMessages } from 'vue/compiler-sfc'
 
-const client = useSupabaseClient()
+const supabase = useSupabaseClient()
 const router = useRouter()
 
 const email = ref('')
@@ -12,14 +12,14 @@ const errorMessage = ref()
 async function signUp() {
   errorMessage.value = ''
   try {
-    const { error } = await client.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email: email.value,
       password: password.value,
     })
     if (error)
       throw error
 
-    const { data: user } = await client.auth.getUser()
+    const { data: user } = await supabase.auth.getUser()
     const admin = computed(() => user.user.user_metadata.admin)
 
     if (admin.value)

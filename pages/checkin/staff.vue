@@ -34,7 +34,7 @@ function getParticipants() {
 const checkin = ref('start')
 let updatedCheckin = { checkin_start: true }
 function whichCheckin(which) {
-  console.log(updatedCheckin)
+  checkin.value = which;
   if (which == 'start')
     updatedCheckin = { checkin_start: true }
   else

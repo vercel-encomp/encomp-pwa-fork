@@ -41,15 +41,17 @@ function whichCheckin(which) {
     updatedCheckin = { checkin_break: true }
 }
 
+const updatedParticipant = ref('')
 const detectionPaused = ref(false)
 async function onDetect(codes) {
-  console.log(codes[0].rawValue)
-  console.log(selected.value.value)
-  const { error } = await supabase
+  const { data, error } = await supabase
   .from(['1','2','3'].includes(selected.value.value) ? 'checkin-talks' : 'checkin-courses')
   .update(updatedCheckin)
   .eq('qrcode', codes[0].rawValue)
   .eq('differentiator', selected.value.value)
+  .select()
+
+  updatedParticipant.value = data[0].participant_name;
 
   if (error) console.log(error)
 
@@ -104,6 +106,10 @@ async function onDetect(codes) {
       <QrcodeStream @detect="onDetect" :paused="detectionPaused"/>
     </div>
     <div class="mt-2 w-full">
+      <div class="flex flex-row">
+        <p class="text-sm mb-1">Último credenciado: </p>
+        <span class="text-sm text-primary">{{ updatedParticipant }}</span>
+      </div>
       <Separator class="bg-gray-400"/>
       <div class="flex flex-row items-center justify-between">
         <p class="font-bold text-lg text-primary mt-2">Lista de Participantes</p>

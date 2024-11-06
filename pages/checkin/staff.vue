@@ -118,12 +118,12 @@ async function onDetect(codes) {
               :class="{'bg-gray-900' : index % 2 == 0 }">
             <p class="text-start font-bold text-sm lg:text-lg">{{ participant.participant_name }}</p>
             <div class="flex flex-row gap-1 mr-1">
-              <Check v-if="participant.checkin_start" class="text-green-400"/>
-              <Check v-if="participant.checkin_break" class="text-green-400"/>
+              <Check :class="{'opacity-0' : !participant.checkin_start }" class="text-green-400"/>
+              <Check :class="{'opacity-0' : !participant.checkin_break }" class="text-green-400"/>
             </div>
           </div>
         </div>
-      </ScrollArea>
+      </ScrollArea> 
       <div v-else class="w-full flex justify-center mt-10">Não há participantes</div>
     </div>
   </div>

@@ -45,7 +45,7 @@ async function signUp() {
     <img class="absolute bottom-0 z-10 " src="/logos/logo_green.png" alt="">
 
     <img class="relative z-20" src="/logos/logo_white.png">
-    <p class="font-bold text-xl relative z-10 mb-10">Credienciamento</p>
+    <p class="font-bold text-xl relative z-10 mb-10">Credenciamento</p>
 
     <form class="relative z-20 flex w-full max-w-80 flex-col items-center gap-6" @submit.prevent="signUp">
       <Input

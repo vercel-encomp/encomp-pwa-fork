@@ -1,6 +1,6 @@
 <script setup>
 import { QrcodeStream } from 'vue-qrcode-reader'
-import { Check, ChevronsUpDown, MicVocal, Soup } from 'lucide-vue-next'
+import { Check, ChevronsUpDown, Flag, Soup } from 'lucide-vue-next'
 
 const isComboOpen = ref(false)
 const activities = [
@@ -24,24 +24,38 @@ const participants = ref([])
 function getParticipants() {
   supabase
   .from(['1','2','3'].includes(selected.value.value) ? 'checkin-talks' : 'checkin-courses')
-  .select('qrcode, participant_name, checked')
+  .select('qrcode, participant_name, checkin_start, checkin_break')
   .eq('differentiator', selected.value.value).then(({ data, error }) => {
     participants.value = data;
   })
 }
 
-function onDetect(codes) {
+
+const checkin = ref('start')
+let updatedCheckin = { checkin_start: true }
+function whichCheckin(which) {
+  console.log(updatedCheckin)
+  if (which == 'start')
+    updatedCheckin = { checkin_start: true }
+  else
+    updatedCheckin = { checkin_break: true }
+}
+
+const detectionPaused = ref(false)
+async function onDetect(codes) {
   console.log(codes[0].rawValue)
   console.log(selected.value.value)
-  supabase
+  const { error } = await supabase
   .from(['1','2','3'].includes(selected.value.value) ? 'checkin-talks' : 'checkin-courses')
-  .update({checked: true})
+  .update(updatedCheckin)
   .eq('qrcode', codes[0].rawValue)
-  .eq('differentiator', selected.value.value).then(({ error }) => {
-    if (error) console.log(error)
-  }).then(() => {
-    getParticipants()
-  })
+  .eq('differentiator', selected.value.value)
+
+  if (error) console.log(error)
+
+  detectionPaused.value = true;
+  getParticipants()
+  setTimeout(() => { detectionPaused.value = false; })
 }
 </script>
 
@@ -87,25 +101,25 @@ function onDetect(codes) {
       </PopoverContent>
     </Popover>
     <div class="max-h-60 max-w-56 overflow-hidden mt-5 rounded-lg">
-      <QrcodeStream @detect="onDetect"/>
+      <QrcodeStream @detect="onDetect" :paused="detectionPaused"/>
     </div>
-    <div class="mt-5 w-full">
+    <div class="mt-2 w-full">
       <Separator class="bg-gray-400"/>
       <div class="flex flex-row items-center justify-between">
         <p class="font-bold text-lg text-primary mt-2">Lista de Participantes</p>
         <div class="flex flex-row gap-1 mr-1">
-          <MicVocal />
-          <Soup />
+          <Flag :class="{'text-tertiary' : checkin == 'start'}" @click="whichCheckin('start')"/>
+          <Soup :class="{'text-tertiary' : checkin == 'break'}" @click="whichCheckin('break')"/>
         </div>
       </div>
-      <ScrollArea v-if="participants.length > 0" class="mt-2">
+      <ScrollArea v-if="participants.length > 0" class="mt-2 lg:max-w-1/3">
         <div v-for="(participant, index) in participants" :key="participants.qrcode">
           <div class="inline-flex justify-between w-full py-1 pl-2 rounded-lg"
               :class="{'bg-gray-900' : index % 2 == 0 }">
-            <p class="text-start font-bold text-sm">{{ participant.participant_name }}</p>
+            <p class="text-start font-bold text-sm lg:text-lg">{{ participant.participant_name }}</p>
             <div class="flex flex-row gap-1 mr-1">
-              <Check v-if="participant.checked" class="text-green-400"/>
-              <Check v-if="participant.checked" class="text-green-400"/>
+              <Check v-if="participant.checkin_start" class="text-green-400"/>
+              <Check v-if="participant.checkin_break" class="text-green-400"/>
             </div>
           </div>
         </div>

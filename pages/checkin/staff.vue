@@ -108,7 +108,7 @@ async function onDetect(codes) {
     <div class="mt-2 w-full">
       <div class="flex flex-row">
         <p class="text-sm mb-1">Último credenciado: </p>
-        <span class="text-sm text-primary">{{ updatedParticipant }}</span>
+        <span class="text-sm text-primary font-bold">{{ updatedParticipant }}</span>
       </div>
       <Separator class="bg-gray-400"/>
       <div class="flex flex-row items-center justify-between">
@@ -118,7 +118,7 @@ async function onDetect(codes) {
           <Soup :class="{'text-tertiary' : checkin == 'break'}" @click="whichCheckin('break')"/>
         </div>
       </div>
-      <ScrollArea v-if="participants.length > 0" class="mt-2 lg:max-w-1/3">
+      <ScrollArea v-if="participants.length > 0" class="mt-2 lg:max-w-1/3 h-[320px]">
         <div v-for="(participant, index) in participants" :key="participants.qrcode">
           <div class="inline-flex justify-between w-full py-1 pl-2 rounded-lg"
               :class="{'bg-gray-900' : index % 2 == 0 }">
